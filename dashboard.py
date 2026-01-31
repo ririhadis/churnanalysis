@@ -20,10 +20,7 @@ st.set_page_config(page_title = "Churn Dashboard", layout="wide")
 #GCP Client
 @st.cache_resource
 def create_gcp_client():
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"]
-    )
-    return storage.Client(credentials=credentials, project= st.secrets["gcp_service_account"]["project_id"])
+    return storage.Client()
 
 
 #Load data from gcp
