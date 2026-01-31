@@ -29,7 +29,7 @@ def create_gcp_client():
 
 #Load data from gcp
 @st.cache_data
-def load_data_from_gcp(client):
+def load_data_from_gcp():
     client = create_gcp_client()
     
     try:
