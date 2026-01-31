@@ -23,23 +23,30 @@ def create_gcp_client():
     credentials = service_account.Credentials.from_service_account_info(
         st.secrets["gcp_service_account"]
     )
-    return storage.Client(credentials=credentials, project= credentials.project_id)
+    return storage.Client(credentials=credentials, project= st.secrets["gcp_service_account"]["project_id"])
 
-client = create_gcp_client()
 
 #Load data from gcp
 @st.cache_data
-def load_data_from_gcp():
-    if not os.path.exists(local_file):
-        bucket = client.bucket(bucket_name)
-        blob = bucket.blob(blob_path)
-        blob.download_to_filename(local_file)
+def load_data_from_gcp(client):
+    try:
+        if not os.path.exists(local_file):
+            bucket = client.bucket(bucket_name)
+            blob = bucket.blob(blob_path)
+            blob.download_to_filename(local_file)
+            
+        df = pd.read_csv(local_file, parse_dates=["last_trx_date"])
+        df["risk_level"] = df["churn_risk"].astype(str)
+        
+        return df
 
-    df = pd.read_csv(local_file, parse_dates=["last_trx_date"])
-    df["risk_level"] = df["churn_risk"].astype(str)
-    return df
+    except Exception as e:
+        st.error("Gagal Load Data dari GCP")
+        st.exception(e)
+        st.stop()
 
-df = load_data_from_gcp()
+client = create_gcp_client()
+df = load_data_from_gcp(client)
 
 #KPI functions
 def compute_kpi(data):
