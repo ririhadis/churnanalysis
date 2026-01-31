@@ -105,16 +105,9 @@ filtered_df = filtered_df[
     (filtered_df["last_trx_date"] <= pd.to_datetime(end_date))
     ]
 
-date_range = st.sidebar.date_input(
-    "Choose the date range",
-    value=None
-)
-
 if not date_range or len(date_range) != 2:
     st.info("⬅️ Pilih rentang tanggal di sidebar untuk memulai analisis.")
     st.stop()
-
-start_date, end_date = map(pd.to_datetime, date_range)
 
 trx_filter = st.sidebar.multiselect(
     "Transaction Code",
