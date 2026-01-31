@@ -35,7 +35,7 @@ def load_data_from_gcp():
         blob = bucket.blob(blob_path)
         blob.download_to_filename(local_file)
 
-    df = pd.read_csv(local_file; parse_dates=["last_trx_date"])
+    df = pd.read_csv(local_file, parse_dates=["last_trx_date"])
     df["risk_level"] = df["churn_risk"].astype(str)
     return df
 
