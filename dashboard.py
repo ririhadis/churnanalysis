@@ -149,7 +149,7 @@ for col in ["trx_code", "risk_level"]:
     ax.set_title(f"Churn Rate by {col}")
     ax.set_ylabel("Churn Rate")
     ax.set_xlabel(col)
-    plt.xticks(rotation=30)
+    #plt.xticks(rotation=30)
     st.pyplot(fig)
 
 st.divider()
