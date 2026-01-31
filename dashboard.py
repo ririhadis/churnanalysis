@@ -30,6 +30,8 @@ def create_gcp_client():
 #Load data from gcp
 @st.cache_data
 def load_data_from_gcp(client):
+    client = create_gcp_client()
+    
     try:
         if not os.path.exists(local_file):
             bucket = client.bucket(bucket_name)
@@ -46,8 +48,7 @@ def load_data_from_gcp(client):
         st.exception(e)
         st.stop()
 
-client = create_gcp_client()
-df = load_data_from_gcp(client)
+df = load_data_from_gcp()
 
 #KPI functions
 def compute_kpi(data):
