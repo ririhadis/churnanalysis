@@ -69,7 +69,7 @@ def compute_kpi(data):
 #Aggregation
 def monthly_churn_trend(data):
     monthly= (
-        data.groupby(pd.Grouper(key="last_trx_date", freq="M")).agg(
+        data.groupby(pd.Grouper(key="last_trx_date", freq="D")).agg(
             ttl_cust =("customer_id", "nunique"),
             churn_cust = ("churn", "sum")
         ).reset_index()
