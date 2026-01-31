@@ -187,7 +187,7 @@ selected_id = st.selectbox(
     filtered_df["customer_id"].unique())
 
 cust_row = filtered_df[filtered_df["customer_id"] == selected_id]
-st.dataframe(cust_row.T, use_container_witdh=True)
+st.dataframe(cust_row.T, use_container_width=True)
 
 st.divider()
 
