@@ -27,9 +27,6 @@ def create_gcp_client():
         project_id = st.secrets["gcp_service_account"]["project_id"]
         return storage.Client(credentials=credentials, project=project_id)
 
-    # Kalau jalan di GCP (Cloud Run / App Engine)
-    return storage.Client()
-
 #Load data from gcp
 @st.cache_data
 def load_data_from_gcp(client):
