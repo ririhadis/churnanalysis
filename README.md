@@ -26,7 +26,7 @@ Customer churn refers to the loss of clients or customers. Predicting churn enab
 ✔ Evaluation using metrics: classification report, confusion matrix, ROC-AUC, average precision  
 ✔ Clear notebook documenting each step
 
-## Dashboard Link
+## Dashboard Link with GCP integration
 https://churnanalysis-rxjzjmc43uqjaxvzhrughn.streamlit.app/
 ---
 
