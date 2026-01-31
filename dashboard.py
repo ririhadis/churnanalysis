@@ -53,6 +53,10 @@ df = load_data_from_gcp()
 #KPI functions
 def compute_kpi(data):
     total_cust = data["customer_id"].nunique()
+
+    if total_cust == 0:
+        return 0, 0, 0.0, 0.0, 0.0
+        
     churned_cust = data[data["churn"] == 1]["customer_id"].nunique()
     churn_rate = churned_cust / total_cust * 100
     retention_rate = 100 - churn_rate
