@@ -105,8 +105,8 @@ filtered_df = filtered_df[
     (filtered_df["last_trx_date"] <= pd.to_datetime(end_date))
     ]
 
-if not date_range or len(date_range) != 2:
-    st.info("⬅️ Pilih rentang tanggal di sidebar untuk memulai analisis.")
+if filtered_df.empty:
+    st.warning("Data is empty on date range.")
     st.stop()
 
 trx_filter = st.sidebar.multiselect(
