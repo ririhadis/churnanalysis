@@ -3,3 +3,6 @@ numpy
 matplotlib
 seaborn
 scikit-learn
+streamlit
+google-cloud-storage
+google-auth
