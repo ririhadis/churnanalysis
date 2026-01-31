@@ -203,10 +203,27 @@ st.divider()
 #Top High Risk
 st.subheader("🔥 Top High Risk Customers")
 
-top_risk = filtered_df[filtered_df["risk_level"].str.lower() == "high"]\
-    .sort_values(by="recency_days", ascending=False)\
-    .head(10)
+top_risk = (
+    filtered_df.assign(
+        risk_level_clean = filtered_df["risk_level"].fillna("").str.lower()).query(
+        "risk_level_clean.str.contains('high')", engine="python").sort_values(
+        by="recency_days", ascending=False).head(10)
+)
 
+if top_risk.empty:
+    st.info("There is no customer with High Risk level in filter")
+else:
+    st.dataframe(
+        top_risk[[
+            "customer_id",
+            "recency_days",
+            "frequency",
+            "risk_level",
+            "trx_code"
+        ]],
+
+        use_container_width=True
+    )
 st.dataframe(
     top_risk[["customer_id", "recency_days", "frequency", "risk_level", "trx_code"]],
     use_container_width = True)
