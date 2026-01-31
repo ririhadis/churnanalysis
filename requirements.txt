@@ -6,3 +6,4 @@ scikit-learn
 streamlit
 google-cloud-storage
 google-auth
+altair<5
